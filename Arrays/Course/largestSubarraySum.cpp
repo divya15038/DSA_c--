@@ -36,11 +36,27 @@ int largestSubarraySumPrefix(int * arr, int n) {
     return largestSum;
 }
 
+//3. Kadane's Algorithm approach: Time Complexity: o(n)
+int largestSubArraySumKadane(int *arr, int n) {
+    int currSum = 0;
+    int largestSum = 0;
+
+    for(int i=0; i<n; i++) {
+        currSum += arr[i];
+        if(currSum < 0) {
+            currSum = 0;
+        }
+        largestSum = max(largestSum, currSum);
+    }
+    return largestSum;
+}
+
 int main() {
     int arr[] = {-2, 3, 4, -1, 5, -12, 6, 1, 3};
     int n = sizeof(arr)/sizeof(int);
 
     cout << largestSubarraySum(arr, n) << " ";
-    cout << largestSubarraySumPrefix(arr, n);
+    cout << largestSubarraySumPrefix(arr, n) << " ";
+    cout << largestSubArraySumKadane(arr, n);
     return 0;
 }

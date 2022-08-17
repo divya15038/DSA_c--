@@ -1,6 +1,6 @@
 //Largest sub Array sum
 //1.Brute force approach: Time Complexity: O(n^2)
-#include<iostream>
+#include<bits/stdc++.h>
 #include<climits>
 using namespace std;
 
@@ -51,12 +51,43 @@ int largestSubArraySumKadane(int *arr, int n) {
     return largestSum;
 }
 
+int maxSumSubarray2(vector<int> arr) {
+    bool flag = true;
+    for(auto x: arr) {
+        if(x>=0){
+            flag = false;
+            break;
+        }
+    }
+    
+    int currSum = 0; 
+    int largestSum = INT_MIN;
+    int n = arr.size();
+    if(!flag){
+        for(int i=0; i<n; i++){
+            currSum += arr[i];
+            if(currSum<0) {
+                currSum = 0;
+            }
+            largestSum = max(largestSum, currSum);
+        }
+    } else {
+        for(int i=0; i<n; i++){
+            largestSum = max(largestSum, arr[i]);
+        }
+    }
+    
+    return largestSum;
+}
+
 int main() {
     int arr[] = {-2, 3, 4, -1, 5, -12, 6, 1, 3};
+    vector<int> a= {-1, -2, -3, -4, -5};
     int n = sizeof(arr)/sizeof(int);
 
     cout << largestSubarraySum(arr, n) << " ";
     cout << largestSubarraySumPrefix(arr, n) << " ";
     cout << largestSubArraySumKadane(arr, n);
+    cout << maxSumSubarray2(a);
     return 0;
 }

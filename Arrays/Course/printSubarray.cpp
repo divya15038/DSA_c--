@@ -1,4 +1,4 @@
-//print all subarrays: number of subarrys possible: (n-1)! Time Complexity: O(n^2)
+//print all subarrays: number of subarrys possible: (n-1)! Time Complexity: O(n^3)
 #include<iostream>
 using namespace std;
 

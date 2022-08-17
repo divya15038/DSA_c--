@@ -14,8 +14,19 @@ void bubbleSort(int *arr, int n) {
 int main() {
     int arr[] = {12, 65, 3, 67, 89, 45, 2};
     int n = sizeof(arr)/sizeof(int);
+    
+    bool flag = true;
+    for(int i=0; i<n; i++){
+        if(arr[i] > arr[i+1]){
+            flag = false;
+            break;
+        }
+    }
 
-    bubbleSort(arr, n);
+    if(!flag){
+        bubbleSort(arr, n);
+    }
+
     for(auto x: arr){
         cout << x << " ";
     }

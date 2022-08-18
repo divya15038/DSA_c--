@@ -5,20 +5,20 @@
 #include<algorithm>
 using namespace std;
 
-vector<char> stringCompression(vector<char> str){
+vector<char> stringCompression(vector<char> &str){
     str.push_back('0');
     int currLen = 1;
-    vector<char> res;
-    for(int i=0; i<str.size()-1; i++){
+    int n = str.size()-1;
+    for(int i=0; i<n; i++){
         if(str[i+1] != str[i]){
             string len = to_string(currLen);
-            res.push_back(str[i]);
+            str.push_back(str[i]);
             if(currLen > 1 && currLen < 10){
-                res.push_back(len[0]);
+                str.push_back(len[0]);
             } else if(currLen >= 10){
                 int j = 0;
                 while(j!=len.length()){
-                    res.push_back(len[j]);
+                    str.push_back(len[j]);
                     j++;
                 }
             } 
@@ -28,7 +28,11 @@ vector<char> stringCompression(vector<char> str){
         }
 
     }
-    return res;
+    while(n>=0){
+        str.erase(str.begin());
+        n--;
+    }
+    return str;
 }
 
 int main() {

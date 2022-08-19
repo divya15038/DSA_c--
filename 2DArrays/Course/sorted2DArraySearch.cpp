@@ -1,5 +1,6 @@
 //sorted array search: Search for an element in the given sorted 2d array(sorted row and column wise). Since matrix is sorted,
 //if we start searchin from either top right corner or bottom left corner moving in one direction will increase values whereas moving in othe direction will decrease values.
+//If the matrix(n x m) was only sorted say row wise, then we could apply binary search in each row and thus, the resulting time complexity: O(nlogm)
 //Time Complexity: O(n)
 #include<iostream>
 using namespace std;

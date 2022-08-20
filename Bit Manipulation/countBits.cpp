@@ -13,8 +13,18 @@ int countSetBits(int n) {
     return count;
 }
 
+//Time Complexity: O(number of set bits)
+int countSetBitsHack(int n) {
+    int count = 0;
+    while(n>0) {
+        n = n&(n-1);
+        count++;
+    }
+    return count;
+}
+
 int main() {
     int n = 15;
-    cout << countSetBits(n);
+    cout << countSetBits(n) << " " << countSetBitsHack(n);
     return 0;
 }

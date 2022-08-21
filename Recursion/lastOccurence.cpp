@@ -20,6 +20,22 @@ int lastOccurence(int arr[], int n, int key){
     return SubIdx;
 }
 
+int lastOccurenceTwo(int arr[], int n, int key) {
+    //base case
+    if(n == 0){
+        return -1;
+    }
+    //recursive case
+    int subIdx = lastOccurenceTwo(arr+1, n-1, key);
+    if(subIdx != -1){
+        return ++subIdx;
+    }
+    if(arr[0] == key){
+        return 0;
+    }
+    return -1;
+}
+
 int main() {
     int arr[] = {1, 2, 3, 5, 2, 5};
     int n = sizeof(arr)/sizeof(n);
@@ -27,5 +43,6 @@ int main() {
     int key; 
     cin >> key;
     cout << lastOccurence(arr, n, key);  
+    cout << " " << lastOccurenceTwo(arr, n, key);
     return 0;
 }

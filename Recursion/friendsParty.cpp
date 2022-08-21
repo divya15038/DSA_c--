@@ -1,7 +1,7 @@
 //friends' party: Given n friends, each friend could be either single or paired up. One friend can be paired up only once. Find the 
 //total number of ways in which friends can be paired up or remain single.
-//Time Complexity: O()
-//Space complexity:  O()
+//Time Complexity: O(2^n)
+//Space complexity:  O(n)
 #include<iostream>
 using namespace std;
 

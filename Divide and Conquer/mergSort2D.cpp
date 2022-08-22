@@ -5,7 +5,7 @@
    Apply merge sort on the left and right partitios of columns.
 3. Merge left and right partitions row wise.
    Merge left and right partitions column wise.
-//Time complexity: O(nlogn)
+//Time complexity: O(n^2logn)
 //Space complexity: O(n)
 */
 #include<bits/stdc++.h>

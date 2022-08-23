@@ -129,7 +129,7 @@ int main() {
 
     vector<vector<int>> ans = mergeSort(v.size(), v.size(), v);
     for(int i=0; i<ans.size(); i++){
-        for(int j=0; j<an.size(); j++){
+        for(int j=0; j<ans.size(); j++){
             cout << ans[i][j] << " ";
         }
         cout << endl;

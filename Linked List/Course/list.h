@@ -166,6 +166,25 @@ public:
         return data;
     }
 
+    Node* deleteTail(Node * head){
+        //Complete this function 
+        if(head == NULL){
+            return NULL;
+        }
+        Node* temp = head;
+        Node* prev;
+        while(temp->next != NULL){
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = NULL;
+        delete temp;
+        return head;
+    }
+
+    Node* getHead(){
+        return head;
+    }
     ~List(){
         if(head != NULL){
             delete head;

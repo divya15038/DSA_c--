@@ -20,5 +20,7 @@ int main(){
     l.print();
     cout << l.pop(l.len()-1) << endl;
     l.print();
+    l.deleteTail(l.getHead());
+    l.print();
     return 0;
 }

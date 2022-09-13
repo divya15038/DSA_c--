@@ -7,14 +7,13 @@ bool duplicateParentheses(string str){
     for(char ch: str){
         if(ch == ')'){
             char top = s.top();
-            s.pop();
-
             int elementsInside = 0;
             while(s.top() != '('){
                 elementsInside++;
                 top = s.top();
                 s.pop();
             }
+            s.pop();
             if(elementsInside<1){
                 return true;
             }
@@ -27,7 +26,7 @@ bool duplicateParentheses(string str){
 }
 
 int main(){
-    string str = "((a+b)+(c+d))";
+    string str = "((a+b)+((c+d)))";
     cout << duplicateParentheses(str);
     return 0;
 }

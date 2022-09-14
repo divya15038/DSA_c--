@@ -1,6 +1,34 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int getMaxArea2(vector<int> hist){
+	int n = hist.size();
+	stack<int> s;
+	s.push(-1);
+	vector<int> leftSmall(n,-1), rightSmall(n,n);  
+	int maxArea = hist[0];
+	int i = 0;
+
+	while(i<n){
+		while(!s.empty() and s.top()!=-1 and hist[s.top()]>hist[i]){
+			rightSmall[s.top()] = i;
+			s.pop();
+		}
+		if(i>0 and hist[i] == hist[i-1]){
+			leftSmall[i] = leftSmall[i-1];
+		}
+		else{
+			leftSmall[i] = s.top();
+		}
+		s.push(i);
+		i++;
+	}
+	for(int j=0; j<n; j++){
+		maxArea = max(maxArea, hist[j] * (rightSmall[j] - leftSmall[j] - 1));
+	}
+	return maxArea;
+}
+
 //Time complexity: O(n)
 int getMaxArea(vector<int> hist){
     int n = hist.size();
@@ -37,9 +65,10 @@ int getMaxArea(vector<int> hist){
 }
 
 // Driver program to test above function
-int main()
-{
+int main()           //{-1,-1,1, 1, 1, -1, 4 }
+{					 //{0, 1, 2, 3, 4, 5, 6}
 	vector<int> hist = {6, 2, 5, 4, 5, 1, 6};
-	cout << "Maximum area is " << getMaxArea(hist);
+	cout << "Maximum area is " << getMaxArea(hist) << endl;
+	cout << "Maximum area is:" << getMaxArea2(hist);
 	return 0;
 }

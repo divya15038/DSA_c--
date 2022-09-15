@@ -33,6 +33,15 @@ Node* buildTreeLevel(vector<int> data){
     return root;
 }
 
+int heightOfTree(Node* root){
+    if(root == NULL){;
+        return 0;
+    }
+    int h1 = heightOfTree(root->left);
+    int h2 = heightOfTree(root->right);
+    return 1 + max(h1, h2);
+}
+
 void levelOrderPrint(Node* root){
     queue<Node*> node;
     node.push(root);
@@ -60,5 +69,6 @@ int main(){
     vector<int> data = {1, 2, 3, 4, 5, -1, 6, -1, -1, 7, -1, -1, -1, -1, -1};
     Node* root = buildTreeLevel(data);
     levelOrderPrint(root);
+    cout << heightOfTree(root);
     return 0;
 }

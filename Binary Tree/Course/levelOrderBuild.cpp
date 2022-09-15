@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 #include<queue>
 using namespace std;
 
@@ -65,10 +66,58 @@ void levelOrderPrint(Node* root){
     } 
 }
 
+vector<int> printKthLevel(Node* root, int k){
+    vector<int> res;
+    if(k == 0){
+        res.push_back(root->data);
+        return res;
+    }
+    queue<Node*> q;
+    int i = 0;
+    q.push(root);
+    q.push(NULL);
+
+    while(i<k and !q.empty()){
+        Node* top = q.front();
+        q.pop();
+        if(top == NULL){
+            q.push(NULL);
+            i++;
+        }
+        else{
+            if(top->left != NULL){
+                q.push(top->left);
+            }
+            if(top->right != NULL){
+                q.push(top->right);
+            }
+        }
+    }
+    int prev = q.front()->data;
+    while(q.front() != NULL){
+        int prev = q.front()->data;
+        res.push_back(prev);
+        //cout << q.front()->data << " ";
+        q.pop();
+        if(q.front() != NULL){
+            int curr = q.front()->data;
+            if(curr == prev){
+                q.pop();
+            }
+        }
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+
 int main(){
-    vector<int> data = {1, 2, 3, 4, 5, -1, 6, -1, -1, 7, -1, -1, -1, -1, -1};
+    vector<int> data = {50, 60, 70, 90, 40, 40, 20};
     Node* root = buildTreeLevel(data);
-    levelOrderPrint(root);
-    cout << heightOfTree(root);
+    //levelOrderPrint(root);
+    //cout << heightOfTree(root);
+    vector<int> res = printKthLevel(root, 2);
+    for(auto x: res){
+        cout << x << " ";
+    }
     return 0;
 }

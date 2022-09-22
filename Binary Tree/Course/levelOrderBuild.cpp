@@ -66,6 +66,25 @@ void levelOrderPrint(Node* root){
     } 
 }
 
+int sumBT(Node* root){
+    queue<Node*> q;
+    int res = 0;
+    q.push(root);
+
+    while(!q.empty()){
+        Node *temp = q.front();
+        q.pop();
+        if(temp->left){
+            q.push(temp->left);
+        }
+        if(temp->right){
+            q.push(temp->right);
+        }
+        res += temp->data;
+    }
+    return res;
+}
+
 vector<int> printKthLevel(Node* root, int k){
     vector<int> res;
     if(k == 0){
@@ -111,13 +130,14 @@ vector<int> printKthLevel(Node* root, int k){
 }
 
 int main(){
-    vector<int> data = {50, 60, 70, 90, 40, 40, 20};
+    vector<int> data = {2, 7, 5, -1, 9, -1, 1, 11, 4, -1, -1};
     Node* root = buildTreeLevel(data);
     //levelOrderPrint(root);
     //cout << heightOfTree(root);
-    vector<int> res = printKthLevel(root, 2);
-    for(auto x: res){
-        cout << x << " ";
-    }
+    //vector<int> res = printKthLevel(root, 2);
+    //for(auto x: res){
+    //    cout << x << " ";
+    //}
+    cout << sumBT(root);
     return 0;
 }

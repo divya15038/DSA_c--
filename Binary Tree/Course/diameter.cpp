@@ -80,6 +80,14 @@ public:
     int diameter;
 };
 
+int minDepth(Node *root) {
+    // Your code here
+    if(root == NULL){
+        return 0;    
+    }
+    return 1 + min(minDepth(root->left), minDepth(root->right));
+}
+
 HDpair Diameter(Node* root) {
     HDpair p;
     //base case
@@ -100,11 +108,67 @@ HDpair Diameter(Node* root) {
     return p;
 }
 
+bool isSymmetric(Node* root) {
+    //your code goes here
+    if(height(root->left) != height(root->right)){
+        return false;
+    }
+    queue<Node*> left, right;
+    left.push(root->left);
+    right.push(root->right);
+
+    while(!left.empty() and !right.empty()){
+        Node* left_front = left.front();
+        left.pop();
+        Node* right_front = right.front();
+        right.pop();
+
+        if(left_front == NULL and right_front == NULL){
+            continue;
+        } else if(left_front == NULL and right_front != NULL) {
+            return false;
+        } else if(left_front != NULL and right_front == NULL) {
+            return false;
+        }
+        if(left_front->data != right_front->data){
+            return false;
+        }
+        left.push(left_front->left);
+        left.push(left_front->right);
+        right.push(right_front->right);
+        right.push(right_front->left);
+    }
+    return true;
+}
+
+int evalTree(Node* root){
+    //base case
+    if(root == NULL){
+        return 0;
+    }  
+    if(root->key != "+" && root->key != "-" && root->key != "*" && root->key != "/"){
+        return stoi(root->key);
+    }
+    
+    if(root->key == "+")
+        return evalTree(root->left) + evalTree(root->right);
+    else if(root->key == "-")
+        return evalTree(root->left) - evalTree(root->right);
+    else if(root->key == "*")
+        return evalTree(root->left)*evalTree(root->right);
+    else if(root->key == "/")
+        return evalTree(root->left)/evalTree(root->right);
+    return 0;
+}
+
 int main() {
     Node* root = buildTree();
-    //levelOrderPrint(root);
-    cout << height(root);
-    cout << endl << diameter(root);
-    cout << endl << Diameter(root).diameter;
+    levelOrderPrint(root);
+    //cout << height(root);
+    //cout << endl << minDepth(root);
+    //cout << isSymmetric(root);
+    //cout << endl << diameter(root);
+    //cout << endl << Diameter(root).diameter;
+    cout << evalTree(root);
     return 0;
 }
